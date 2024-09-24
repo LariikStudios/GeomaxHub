@@ -76,6 +76,8 @@ GUI._Minimze.Position=UDim2.fromScale(.48,.465)
 GUI._Minimze.Size=UDim2.fromScale(.04,.071)
 GUI._Minimze.AutoButtonColor=false
 GUI._Minimze.BackgroundTransparency=1
+GUI._Minimze.ResampleMode=Enum.ResamplerMode.Pixelated
+GUI._Minimze.Visible=false
 GUI._Minimze.Parent=GUI._ScreenGui
 wait()
 GUI._Frame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -89,6 +91,7 @@ GUI._Icon.Image='rbxassetid://82463366525565'
 GUI._Icon.Position=UDim2.fromScale(.012,.01)
 GUI._Icon.Size=UDim2.fromScale(.056,.1)
 GUI._Icon.BackgroundTransparency=1
+GUI._Icon.ResampleMode=Enum.ResamplerMode.Pixelated
 GUI._Icon.Parent=GUI._Frame
 wait()
 GUI._Frame1.Size = UDim2.fromScale(1, 0.12)
@@ -307,12 +310,14 @@ wait()
 local WalkSpeedToggle = false
 local FlyToggle = false
 
-local isDragging = false
-local dragStart
+local isDraggingGui = false
+local dragStartGui
+local isDraggingMinimize = false
 
 local isMouseInsideFrame1 = false
 local isMouseInsideWalkSpeedSliderButton = false
 local isMouseInsideFlySliderButton = false
+local isMouseInsideMinimize = false
 
 local flying = false
 local flymaxspeed = 16/16
@@ -341,14 +346,14 @@ function Fly(character)
 	local speed = 0
 	flyscript = game:GetService('RunService').Stepped:Connect(function()
 		if ctrl.w == 1 or ctrl.a == 1 or ctrl.s == 1 or ctrl.d == 1 then
-			speed = speed + 1
+			speed+=1
 			if speed > flymaxspeed then
 				speed = flymaxspeed
 			end
 			wait()
 		end
 		if not ctrl.w == 1 and not ctrl.a == 1 and not ctrl.s == 1 and not ctrl.d == 1 then
-			speed = speed - 1
+			speed-=1
 			if speed < 1 then
 				speed = 1
 			end
@@ -392,6 +397,41 @@ function Fly(character)
 		end
 	end)
 end
+
+function makeDraggable(frame)
+	isDraggingMinimize=false
+	local dragInput, mousePos, framePos
+
+	frame.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			isDraggingMinimize = true
+			mousePos = input.Position
+			framePos = frame.Position
+			
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					wait(.01)
+					isDraggingMinimize = false
+				end
+			end)
+		end
+	end)
+
+	frame.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement then
+			dragInput = input
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and isDraggingMinimize then
+			local delta = input.Position - mousePos
+			frame.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+		end
+	end)
+end
+
+
 
 -- Event Connections
 
@@ -484,8 +524,10 @@ local function createSliderLogic(sliderButton, sliderBar, updateFunc, minValue, 
 			move(input)
 		end
 	end)
+
 end
 
+makeDraggable(GUI._Minimze)
 createSliderLogic(GUI._WalkSpeedSliderButton, GUI._WalkSpeedSliderBar, updateWalkSpeed, 1, 100,'walkspeed')
 createSliderLogic(GUI._FlySliderButton, GUI._FlySliderBar, updateFlySpeed, 1, 100,'fly')
 
@@ -497,6 +539,21 @@ end)
 
 GUI._Frame1.MouseLeave:Connect(function()
 	isMouseInsideFrame1=false
+end)
+
+GUI._Minimze.MouseEnter:Connect(function()
+	isMouseInsideMinimize=true
+end)
+
+GUI._Minimze.MouseLeave:Connect(function()
+	isMouseInsideMinimize=false
+end)
+
+GUI._Minimze.MouseButton1Click:Connect(function()
+	if not isDraggingMinimize then	
+		GUI._Frame.Visible=not GUI._Frame.Visible
+		GUI._Minimze.Visible=not GUI._Minimze.Visible
+	end
 end)
 
 UserInputService.InputBegan:Connect(function(input)
@@ -523,5 +580,6 @@ end)
 UserInputService.InputBegan:Connect(function(input)
 	if input.KeyCode==Enum.KeyCode.RightControl then
 		GUI._Frame.Visible=not GUI._Frame.Visible
+		GUI._Minimze.Visible=not GUI._Minimze.Visible
 	end
 end)
