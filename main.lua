@@ -18,10 +18,19 @@ local GUI = {
 	_Icon = Instance.new('ImageLabel'),
 	_Minimze = Instance.new('ImageButton'),
 	_Minimize1 = Instance.new("TextButton"),
+	_MainContainer = Instance.new("Frame"),
+	_ScriptsContainer = Instance.new("ScrollingFrame"),
+	_Main = Instance.new("TextButton"),
+	_Scripts = Instance.new("TextButton"),
 
 	--Buttons
 	_WalkSpeed = Instance.new("TextButton"),
 	_Fly = Instance.new("TextButton"),
+	_AzureModded = Instance.new("TextButton"),
+
+	--TextLabels
+	_Game1 = Instance.new("TextLabel"),
+	_Status1 = Instance.new('TextLabel'),
 
 	--UICorners
 	_UICorner = Instance.new("UICorner"),
@@ -43,6 +52,7 @@ local GUI = {
 	_UITSC = Instance.new("UITextSizeConstraint"),
 	_UITSC1 = Instance.new("UITextSizeConstraint"),
 
+	--WalkSpeed Slider
 	_WalkSpeedSlider = Instance.new("Frame"),
 	_WalkSpeedSliderBar = Instance.new("Frame"),
 	_WalkSpeedSliderButton = Instance.new("TextButton"),
@@ -87,6 +97,23 @@ GUI._Frame.Position = UDim2.fromScale(0.5, 0.5)
 GUI._Frame.Size = UDim2.fromScale(0.5, 0.5)
 GUI._Frame.ClipsDescendants = true
 GUI._Frame.Parent = GUI._ScreenGui
+
+GUI._MainContainer.AnchorPoint=Vector2.new(.5,.5)
+GUI._MainContainer.BackgroundTransparency=1
+GUI._MainContainer.Position=UDim2.fromScale(.5,.5)
+GUI._MainContainer.Size=UDim2.fromScale(1,1)
+GUI._MainContainer.Name="MainContainer"
+GUI._MainContainer.Parent=GUI._Frame
+
+GUI._ScriptsContainer.BackgroundTransparency=1
+GUI._ScriptsContainer.Position=UDim2.fromScale(0,.12)
+GUI._ScriptsContainer.Size=UDim2.fromScale(1,.88)
+GUI._ScriptsContainer.CanvasSize=UDim2.fromScale(0,5)
+GUI._ScriptsContainer.Name="ScriptsContainer"
+GUI._ScriptsContainer.ScrollBarThickness=0
+GUI._ScriptsContainer.ScrollBarImageTransparency=1
+GUI._ScriptsContainer.Visible=false
+GUI._ScriptsContainer.Parent=GUI._Frame
 
 GUI._Icon.Image='rbxassetid://82463366525565'
 GUI._Icon.Position=UDim2.fromScale(.012,.01)
@@ -135,7 +162,7 @@ GUI._WalkSpeed.Font = Enum.Font.FredokaOne
 GUI._WalkSpeed.Text = 'WalkSpeed'
 GUI._WalkSpeed.TextScaled = true
 GUI._WalkSpeed.TextColor3 = Color3.fromRGB(167, 220, 255)
-GUI._WalkSpeed.Parent = GUI._Frame
+GUI._WalkSpeed.Parent = GUI._MainContainer
 
 GUI._UICorner1.CornerRadius = UDim.new(1, 0)
 GUI._UICorner1.Parent = GUI._WalkSpeed
@@ -160,7 +187,7 @@ GUI._Fly.Font = Enum.Font.FredokaOne
 GUI._Fly.Text = 'Fly'
 GUI._Fly.TextScaled = true
 GUI._Fly.TextColor3 = Color3.fromRGB(167, 220, 255)
-GUI._Fly.Parent = GUI._Frame
+GUI._Fly.Parent = GUI._MainContainer
 
 GUI._UICorner2.CornerRadius = UDim.new(1, 0)
 GUI._UICorner2.Parent = GUI._Fly
@@ -218,10 +245,54 @@ GUI._UIStroke13=GUI._UIStroke3:Clone()
 GUI._UICorner12=GUI._UICorner2:Clone()
 GUI._UIGradient12=GUI._UIGradient2:Clone()
 
+GUI._UIStroke14=GUI._UIStroke3:Clone()
+GUI._UICorner13=GUI._UICorner2:Clone()
+GUI._UIGradient13=GUI._UIGradient2:Clone()
+
+GUI._UIStroke15=GUI._UIStroke3:Clone()
+GUI._UICorner14=GUI._UICorner2:Clone()
+GUI._UIGradient14=GUI._UIGradient2:Clone()
+
+GUI._UIStroke16=GUI._UIStroke3:Clone()
+GUI._UICorner15=GUI._UICorner2:Clone()
+GUI._UIGradient15=GUI._UIGradient2:Clone()
+
+GUI._UIStroke17=GUI._UIStroke3:Clone()
+GUI._UICorner16=GUI._UICorner2:Clone()
+GUI._UIGradient16=GUI._UIGradient2:Clone()
+
+GUI._UIStroke18=GUI._UIStroke3:Clone()
+GUI._UICorner17=GUI._UICorner2:Clone()
+GUI._UIGradient17=GUI._UIGradient2:Clone()
+
+GUI._UIStroke19=GUI._UIStroke3:Clone()
+GUI._UICorner18=GUI._UICorner2:Clone()
+GUI._UIGradient18=GUI._UIGradient2:Clone()
+
+GUI._UIStroke20=GUI._UIStroke3:Clone()
+GUI._UICorner19=GUI._UICorner2:Clone()
+GUI._UIGradient19=GUI._UIGradient2:Clone()
+
+GUI._UIStroke21=GUI._UIStroke3:Clone()
+GUI._UICorner20=GUI._UICorner2:Clone()
+GUI._UIGradient20=GUI._UIGradient2:Clone()
+
+GUI._UIStroke22=GUI._UIStroke3:Clone()
+GUI._UICorner21=GUI._UICorner2:Clone()
+GUI._UIGradient21=GUI._UIGradient2:Clone()
+
+GUI._UIStroke23=GUI._UIStroke3:Clone()
+GUI._UICorner22=GUI._UICorner2:Clone()
+GUI._UIGradient22=GUI._UIGradient2:Clone()
+
+GUI._UIStroke24=GUI._UIStroke3:Clone()
+GUI._UICorner23=GUI._UICorner2:Clone()
+GUI._UIGradient23=GUI._UIGradient2:Clone()
+
 GUI._WalkSpeedSlider.Size = UDim2.fromScale(.5,.05)
 GUI._WalkSpeedSlider.Position = UDim2.fromScale(.306,.201)
 GUI._WalkSpeedSlider.BackgroundColor3 = Color3.fromRGB(90, 95, 112)
-GUI._WalkSpeedSlider.Parent = GUI._Frame
+GUI._WalkSpeedSlider.Parent = GUI._MainContainer
 
 GUI._UIStroke4.Parent=GUI._WalkSpeedSlider
 GUI._UICorner3.Parent=GUI._WalkSpeedSlider
@@ -263,7 +334,7 @@ GUI._UIGradient5.Parent=GUI._WalkSpeedValueDisplay
 GUI._FlySlider.Size = UDim2.fromScale(.5,.05)
 GUI._FlySlider.Position = UDim2.fromScale(.306,.335)
 GUI._FlySlider.BackgroundColor3 = Color3.fromRGB(90, 95, 112)
-GUI._FlySlider.Parent = GUI._Frame
+GUI._FlySlider.Parent = GUI._MainContainer
 
 GUI._UIStroke9.Parent=GUI._FlySlider
 GUI._UICorner8.Parent=GUI._FlySlider
@@ -311,6 +382,140 @@ GUI._Minimize1.TextColor3=Color3.fromRGB(174,209,255)
 GUI._Minimize1.TextSize=30
 GUI._Minimize1.Parent=GUI._Frame
 
+GUI._UITSC2=GUI._UITSC1:Clone()
+GUI._UITSC3=GUI._UITSC1:Clone()
+GUI._UITSC4=GUI._UITSC1:Clone()
+GUI._UITSC5=GUI._UITSC1:Clone()
+GUI._UITSC6=GUI._UITSC1:Clone()
+GUI._UITSC7=GUI._UITSC1:Clone()
+GUI._UITSC8=GUI._UITSC1:Clone()
+GUI._UITSC9=GUI._UITSC1:Clone()
+GUI._UITSC10=GUI._UITSC1:Clone()
+
+GUI._Main.BackgroundColor3=Color3.fromRGB(82, 97, 118)
+GUI._Main.BackgroundTransparency=.25
+GUI._Main.Position=UDim2.fromScale(.356,0)
+GUI._Main.Size=UDim2.fromScale(.258,.12)
+GUI._Main.Font=Enum.Font.FredokaOne
+GUI._Main.Text='Main'
+GUI._Main.TextColor3=Color3.fromRGB(198,233,255)
+GUI._Main.TextScaled=true
+GUI._Main.Parent=GUI._Frame
+
+GUI._UIStroke13.Parent=GUI._Main
+GUI._UIGradient12.Parent=GUI._Main 
+GUI._UITSC2.Parent=GUI._Main
+
+GUI._Scripts.BackgroundColor3=Color3.fromRGB(82, 97, 118)
+GUI._Scripts.BackgroundTransparency=.25
+GUI._Scripts.Position=UDim2.fromScale(.614,0)
+GUI._Scripts.Size=UDim2.fromScale(.258,.12)
+GUI._Scripts.Font=Enum.Font.FredokaOne
+GUI._Scripts.Text='Scripts'
+GUI._Scripts.TextColor3=Color3.fromRGB(198,233,255)
+GUI._Scripts.TextScaled=true
+GUI._Scripts.Parent=GUI._Frame
+
+GUI._UIStroke14.Parent=GUI._Scripts
+GUI._UIGradient13.Parent=GUI._Scripts 
+GUI._UITSC3.Parent=GUI._Scripts
+
+GUI._Game1.BackgroundTransparency=1
+GUI._Game1.Position=UDim2.fromScale(.018,.005)
+GUI._Game1.Size=UDim2.fromScale(.5,.02)
+GUI._Game1.Font=Enum.Font.FredokaOne
+GUI._Game1.Text="Any"
+GUI._Game1.TextColor3=Color3.fromRGB(155,182,255)
+GUI._Game1.TextScaled=true
+GUI._Game1.Parent=GUI._ScriptsContainer
+
+GUI._Game2=GUI._Game1:Clone()
+GUI._Game3=GUI._Game1:Clone()
+
+GUI._Game2.Position=UDim2.fromScale(.018,.058)
+GUI._Game2.Text="Da Hood"
+GUI._Game2.Parent=GUI._ScriptsContainer
+
+GUI._Game3.Position=UDim2.fromScale(.018,.11)
+GUI._Game3.Text="Murder Mystery 2"
+GUI._Game3.Parent=GUI._ScriptsContainer
+
+GUI._AzureModded.BackgroundColor3=Color3.fromRGB(100,114,145)
+GUI._AzureModded.Position=UDim2.fromScale(.018,.083)
+GUI._AzureModded.Size=UDim2.fromScale(.431,.02)
+GUI._AzureModded.Font=Enum.Font.FredokaOne
+GUI._AzureModded.Text="Azure Modded"
+GUI._AzureModded.Name="Azure Modded"
+GUI._AzureModded.TextColor3=Color3.fromRGB(167,220,255)
+GUI._AzureModded.TextScaled=true
+GUI._AzureModded.Parent=GUI._ScriptsContainer
+
+GUI._HighlightHub=GUI._AzureModded:Clone()
+GUI._InfiniteYield=GUI._AzureModded:Clone()
+GUI._Yarhm=GUI._AzureModded:Clone()
+
+GUI._Status1.BackgroundTransparency=1
+GUI._Status1.Position=UDim2.fromScale(1.05,0)
+GUI._Status1.Size=UDim2.fromScale(.374,1)
+GUI._Status1.Font=Enum.Font.FredokaOne
+GUI._Status1.Text="🟢  Keyless"
+GUI._Status1.TextColor3=Color3.fromRGB(155,182,255)
+GUI._Status1.TextScaled=true
+
+
+GUI._Status1.Parent=GUI._AzureModded
+GUI._Status2=GUI._Status1:Clone()
+GUI._Status3=GUI._Status1:Clone()
+GUI._Status4=GUI._Status1:Clone()
+
+GUI._HighlightHub.Position=UDim2.fromScale(.018,.135)
+GUI._HighlightHub.Text="Highlight Hub"
+GUI._HighlightHub.Name="Highlight Hub"
+GUI._HighlightHub.Parent=GUI._ScriptsContainer
+
+GUI._Status2.Position=UDim2.fromScale(1.05,0)
+GUI._Status2.Size=UDim2.fromScale(.853,1)
+GUI._Status2.Text="🟡 Key: hlvipcomingsoon"
+GUI._Status2.Parent=GUI._HighlightHub
+
+GUI._InfiniteYield.Position=UDim2.fromScale(.018,.032)
+GUI._InfiniteYield.Text="Infinite Yield"
+GUI._InfiniteYield.Name="Infinite Yield"
+GUI._InfiniteYield.Parent=GUI._ScriptsContainer
+
+GUI._Status3.Position=UDim2.fromScale(1.05,0)
+GUI._Status3.Text="🟢  Keyless"
+GUI._Status3.Parent=GUI._InfiniteYield
+GUI._Yarhm.Position=UDim2.fromScale(.018,.16)
+GUI._Yarhm.Text="Yarhm"
+GUI._Yarhm.Name="Yarhm"
+GUI._Yarhm.Parent=GUI._ScriptsContainer
+
+GUI._Status4.Position=UDim2.fromScale(1.05,0)
+GUI._Status4.Text="🟢  Keyless"
+GUI._Status4.Parent=GUI._Yarhm
+GUI._UICorner12.Parent=GUI._AzureModded
+GUI._UIStroke15.Parent=GUI._AzureModded
+GUI._UIGradient14.Parent=GUI._AzureModded 
+GUI._UITSC4.Parent=GUI._AzureModded
+
+GUI._UICorner13.Parent=GUI._HighlightHub
+GUI._UIStroke16.Parent=GUI._HighlightHub
+GUI._UIGradient15.Parent=GUI._HighlightHub 
+GUI._UITSC5.Parent=GUI._HighlightHub
+
+GUI._UICorner14.Parent=GUI._InfiniteYield
+GUI._UIStroke17.Parent=GUI._InfiniteYield
+GUI._UIGradient16.Parent=GUI._InfiniteYield 
+GUI._UITSC6.Parent=GUI._InfiniteYield
+
+GUI._UICorner15.Parent=GUI._Yarhm
+GUI._UIStroke18.Parent=GUI._Yarhm
+GUI._UIGradient17.Parent=GUI._Yarhm 
+GUI._UITSC7.Parent=GUI._Yarhm
+
+
+
 
 
 -- Variables
@@ -337,7 +542,6 @@ local flying = false
 local flymaxspeed = 16/16
 
 local walkspeed = 16
-
 
 -- Functions
 
@@ -411,7 +615,6 @@ function Fly(character)
 		end
 	end)
 end
-
 
 -- Event Connections
 
@@ -517,6 +720,32 @@ UserInputService.InputBegan:Connect(function(input)
 		GUI._Frame.Visible=not GUI._Frame.Visible
 		GUI._Minimze.Visible=not GUI._Minimze.Visible
 	end
+end)
+
+GUI._Main.MouseButton1Click:Connect(function()
+	GUI._MainContainer.Visible=true
+	GUI._ScriptsContainer.Visible=false
+end)
+
+GUI._Scripts.MouseButton1Click:Connect(function()
+	GUI._MainContainer.Visible=false
+	GUI._ScriptsContainer.Visible=true
+end)
+
+GUI._InfiniteYield.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+GUI._AzureModded.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Actyrn/Scripts/main/AzureModded"))()
+end)
+
+GUI._HighlightHub.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Tadash-10/Highlight-Hub/main/Key", true))()
+end)
+
+GUI._Yarhm.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Joystickplays/psychic-octo-invention/main/yarhm.lua", false))()
 end)
 
 GUI._Frame1.MouseEnter:Connect(function()
