@@ -741,7 +741,7 @@ GUI._AzureModded.MouseButton1Click:Connect(function()
 end)
 
 GUI._HighlightHub.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Tadash-10/Highlight-Hub/main/Key", true))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ThatSick/HighlightMM2/main/Main"))()
 end)
 
 GUI._Yarhm.MouseButton1Click:Connect(function()
