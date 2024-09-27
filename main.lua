@@ -20,8 +20,13 @@ local GUI = {
 	_Minimize1 = Instance.new("TextButton"),
 	_MainContainer = Instance.new("Frame"),
 	_ScriptsContainer = Instance.new("ScrollingFrame"),
+	_SettingsContainer = Instance.new("ScrollingFrame"),
 	_Main = Instance.new("TextButton"),
 	_Scripts = Instance.new("TextButton"),
+	_Settings = Instance.new("ImageButton"),
+	
+	--Frames
+	_BackgroundColorDisplay = Instance.new('Frame'),
 
 	--Buttons
 	_WalkSpeed = Instance.new("TextButton"),
@@ -30,7 +35,15 @@ local GUI = {
 
 	--TextLabels
 	_Game1 = Instance.new("TextLabel"),
+	_Settings1 = Instance.new("TextLabel"),
 	_Status1 = Instance.new('TextLabel'),
+	_RedLabel = Instance.new("TextLabel"),
+	_GreenLabel = Instance.new("TextLabel"),
+	_BlueLabel = Instance.new('TextLabel'),
+	_HueLabel = Instance.new("TextLabel"),
+	_SatLabel = Instance.new("TextLabel"),
+	_ValLabel = Instance.new('TextLabel'),
+	_BackgroundColorDisplayLabel = Instance.new('TextLabel'),
 
 	--UICorners
 	_UICorner = Instance.new("UICorner"),
@@ -63,6 +76,30 @@ local GUI = {
 	_FlySliderBar = Instance.new("Frame"),
 	_FlySliderButton = Instance.new("TextButton"),
 	_FlyValueDisplay = Instance.new("TextLabel"),
+	
+	--Colorpicker
+	_ColorPicker = Instance.new("Frame"),
+	_ColorPickerMain = Instance.new("Frame"),
+	_ColorPickerSelectedColor = Instance.new("Frame"),
+	_ColorStatNumbers = Instance.new("Frame"),
+	_ColorBlock = Instance.new("ImageLabel"),
+	_ColorValueBlock = Instance.new("ImageLabel"),
+	_ColorBlockPicker = Instance.new("Frame"),
+	_ColorValuePicker = Instance.new("Frame"),
+	_ColorPickerButton = Instance.new("TextButton"),
+	_ColorRedVal = Instance.new("TextLabel"),
+	_ColorGreenVal = Instance.new("TextLabel"),
+	_ColorBlueVal = Instance.new("TextLabel"),
+	_ColorHueVal = Instance.new("TextLabel"),
+	_ColorSatVal = Instance.new("TextLabel"),
+	_ColorValVal = Instance.new("TextLabel"),
+	_ColorHexVal = Instance.new("TextBox"),
+	
+	--UIPaddings
+	_UIPadding = Instance.new('UIPadding'),
+	
+	--UIAspectRatioConstraints
+	_UIARC = Instance.new('UIAspectRatioConstraint')
 }
 
 local UserInputService = game:GetService("UserInputService")
@@ -80,7 +117,7 @@ GUI._ScreenGui.IgnoreGuiInset = true
 GUI._ScreenGui.Name = randomString()
 GUI._ScreenGui.ScreenInsets=Enum.ScreenInsets.CoreUISafeInsets
 GUI._ScreenGui.ZIndexBehavior=Enum.ZIndexBehavior.Global
-GUI._ScreenGui.Parent = game.CoreGui
+GUI._ScreenGui.Parent = plr.PlayerGui
 
 GUI._Minimze.Image='rbxassetid://82463366525565'
 GUI._Minimze.Position=UDim2.fromScale(.48,.465)
@@ -114,6 +151,16 @@ GUI._ScriptsContainer.ScrollBarThickness=0
 GUI._ScriptsContainer.ScrollBarImageTransparency=1
 GUI._ScriptsContainer.Visible=false
 GUI._ScriptsContainer.Parent=GUI._Frame
+
+GUI._SettingsContainer.BackgroundTransparency=1
+GUI._SettingsContainer.Position=UDim2.fromScale(0,.12)
+GUI._SettingsContainer.Size=UDim2.fromScale(1,.88)
+GUI._SettingsContainer.CanvasSize=UDim2.fromScale(0,5)
+GUI._SettingsContainer.Name="SettingsContainer"
+GUI._SettingsContainer.ScrollBarThickness=0
+GUI._SettingsContainer.ScrollBarImageTransparency=1
+GUI._SettingsContainer.Visible=false
+GUI._SettingsContainer.Parent=GUI._Frame
 
 GUI._Icon.Image='rbxassetid://82463366525565'
 GUI._Icon.Position=UDim2.fromScale(.012,.01)
@@ -200,7 +247,7 @@ GUI._UIStroke3.Color = Color3.fromRGB(51, 49, 81)
 GUI._UIStroke3.Thickness = 2
 GUI._UIStroke3.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 GUI._UIStroke3.Parent = GUI._Fly
-wait()
+
 GUI._UITSC1.MinTextSize = 1
 GUI._UITSC1.MaxTextSize = 17
 GUI._UITSC1.Parent = GUI._Fly
@@ -289,6 +336,110 @@ GUI._UIStroke24=GUI._UIStroke3:Clone()
 GUI._UICorner23=GUI._UICorner2:Clone()
 GUI._UIGradient23=GUI._UIGradient2:Clone()
 
+GUI._UIStroke25=GUI._UIStroke3:Clone()
+GUI._UICorner24=GUI._UICorner2:Clone()
+GUI._UIGradient24=GUI._UIGradient2:Clone()
+
+GUI._UIStroke26=GUI._UIStroke3:Clone()
+GUI._UICorner25=GUI._UICorner2:Clone()
+GUI._UIGradient25=GUI._UIGradient2:Clone()
+
+GUI._UIStroke27=GUI._UIStroke3:Clone()
+GUI._UICorner26=GUI._UICorner2:Clone()
+GUI._UIGradient26=GUI._UIGradient2:Clone()
+
+GUI._UIStroke28=GUI._UIStroke3:Clone()
+GUI._UICorner27=GUI._UICorner2:Clone()
+GUI._UIGradient27=GUI._UIGradient2:Clone()
+
+GUI._UIStroke29=GUI._UIStroke3:Clone()
+GUI._UICorner28=GUI._UICorner2:Clone()
+GUI._UIGradient28=GUI._UIGradient2:Clone()
+
+GUI._UIStroke30=GUI._UIStroke3:Clone()
+GUI._UICorner29=GUI._UICorner2:Clone()
+GUI._UIGradient29=GUI._UIGradient2:Clone()
+
+GUI._UIStroke31=GUI._UIStroke3:Clone()
+GUI._UICorner30=GUI._UICorner2:Clone()
+GUI._UIGradient30=GUI._UIGradient2:Clone()
+
+GUI._UIStroke32=GUI._UIStroke3:Clone()
+GUI._UICorner31=GUI._UICorner2:Clone()
+GUI._UIGradient31=GUI._UIGradient2:Clone()
+
+GUI._UIStroke33=GUI._UIStroke3:Clone()
+GUI._UICorner32=GUI._UICorner2:Clone()
+GUI._UIGradient32=GUI._UIGradient2:Clone()
+
+GUI._UIStroke34=GUI._UIStroke3:Clone()
+GUI._UICorner33=GUI._UICorner2:Clone()
+GUI._UIGradient33=GUI._UIGradient2:Clone()
+
+GUI._UIStroke35=GUI._UIStroke3:Clone()
+GUI._UICorner34=GUI._UICorner2:Clone()
+GUI._UIGradient34=GUI._UIGradient2:Clone()
+
+GUI._UIStroke36=GUI._UIStroke3:Clone()
+GUI._UICorner35=GUI._UICorner2:Clone()
+GUI._UIGradient35=GUI._UIGradient2:Clone()
+
+GUI._UIStroke37=GUI._UIStroke3:Clone()
+GUI._UICorner36=GUI._UICorner2:Clone()
+GUI._UIGradient36=GUI._UIGradient2:Clone()
+
+GUI._UIStroke38=GUI._UIStroke3:Clone()
+GUI._UICorner37=GUI._UICorner2:Clone()
+GUI._UIGradient37=GUI._UIGradient2:Clone()
+
+GUI._UIStroke39=GUI._UIStroke3:Clone()
+GUI._UICorner38=GUI._UICorner2:Clone()
+GUI._UIGradient38=GUI._UIGradient2:Clone()
+
+GUI._UIStroke40=GUI._UIStroke3:Clone()
+GUI._UICorner39=GUI._UICorner2:Clone()
+GUI._UIGradient39=GUI._UIGradient2:Clone()
+
+GUI._UIStroke41=GUI._UIStroke3:Clone()
+GUI._UICorner40=GUI._UICorner2:Clone()
+GUI._UIGradient40=GUI._UIGradient2:Clone()
+
+GUI._UIStroke42=GUI._UIStroke3:Clone()
+GUI._UICorner41=GUI._UICorner2:Clone()
+GUI._UIGradient41=GUI._UIGradient2:Clone()
+
+GUI._UIStroke43=GUI._UIStroke3:Clone()
+GUI._UICorner42=GUI._UICorner2:Clone()
+GUI._UIGradient42=GUI._UIGradient2:Clone()
+
+GUI._UIStroke44=GUI._UIStroke3:Clone()
+GUI._UICorner43=GUI._UICorner2:Clone()
+GUI._UIGradient43=GUI._UIGradient2:Clone()
+
+GUI._UIStroke45=GUI._UIStroke3:Clone()
+GUI._UICorner44=GUI._UICorner2:Clone()
+GUI._UIGradient44=GUI._UIGradient2:Clone()
+
+GUI._UIStroke46=GUI._UIStroke3:Clone()
+GUI._UICorner45=GUI._UICorner2:Clone()
+GUI._UIGradient45=GUI._UIGradient2:Clone()
+
+GUI._UIStroke47=GUI._UIStroke3:Clone()
+GUI._UICorner46=GUI._UICorner2:Clone()
+GUI._UIGradient46=GUI._UIGradient2:Clone()
+
+GUI._UIStroke48=GUI._UIStroke3:Clone()
+GUI._UICorner47=GUI._UICorner2:Clone()
+GUI._UIGradient47=GUI._UIGradient2:Clone()
+
+GUI._UIStroke49=GUI._UIStroke3:Clone()
+GUI._UICorner48=GUI._UICorner2:Clone()
+GUI._UIGradient48=GUI._UIGradient2:Clone()
+
+GUI._UIStroke50=GUI._UIStroke3:Clone()
+GUI._UICorner49=GUI._UICorner2:Clone()
+GUI._UIGradient49=GUI._UIGradient2:Clone()
+
 GUI._WalkSpeedSlider.Size = UDim2.fromScale(.5,.05)
 GUI._WalkSpeedSlider.Position = UDim2.fromScale(.306,.201)
 GUI._WalkSpeedSlider.BackgroundColor3 = Color3.fromRGB(90, 95, 112)
@@ -345,20 +496,6 @@ GUI._FlySliderBar.Position = UDim2.fromScale(0, 0)
 GUI._FlySliderBar.BackgroundColor3 = Color3.fromRGB(110, 137, 161)
 GUI._FlySliderBar.Parent = GUI._FlySlider
 
-GUI._UIStroke10.Parent=GUI._FlySliderBar
-GUI._UICorner9.Parent=GUI._FlySliderBar
-
-GUI._FlySliderButton.Size = UDim2.new(0.1, 0, 1, 0)
-GUI._FlySliderButton.Position = UDim2.new(0, 0, 0, 0)
-GUI._FlySliderButton.BackgroundColor3 = Color3.fromRGB(55, 75, 130)
-GUI._FlySliderButton.Text = ""
-GUI._FlySliderButton.Name="SliderButton"
-GUI._FlySliderButton.Parent = GUI._FlySliderBar
-
-GUI._UIStroke11.Parent=GUI._FlySliderButton
-GUI._UICorner10.Parent=GUI._FlySliderButton
-GUI._UIGradient10.Parent=GUI._FlySliderButton
-
 GUI._FlyValueDisplay.BackgroundColor3=Color3.fromRGB(105,122,149)
 GUI._FlyValueDisplay.BackgroundTransparency=.25
 GUI._FlyValueDisplay.Position=UDim2.fromScale(1.049,0)
@@ -368,6 +505,62 @@ GUI._FlyValueDisplay.TextColor3=Color3.fromRGB(198,233,255)
 GUI._FlyValueDisplay.TextScaled=true
 GUI._FlyValueDisplay.Name='ValueDisplay'
 GUI._FlyValueDisplay.Parent=GUI._FlySlider
+
+GUI._UIStroke10.Parent=GUI._FlySliderBar
+GUI._UICorner9.Parent=GUI._FlySliderBar
+
+GUI._Transparency=GUI._Fly:Clone()
+GUI._Transparency.Name='Transparency'
+GUI._Transparency.Position=UDim2.fromScale(.018,.03)
+GUI._Transparency.Size=UDim2.fromScale(.26,.02)
+GUI._Transparency.Text='Transparency'
+GUI._Transparency.Parent=GUI._SettingsContainer
+
+GUI._TransparencySlider=GUI._FlySlider:Clone()
+GUI._TransparencySlider.ValueDisplay.Text='1'
+GUI._TransparencySlider.Position=UDim2.fromScale(.3,.036)
+GUI._TransparencySlider.Size=UDim2.fromScale(.5,.009)
+GUI._TransparencySlider.Parent=GUI._SettingsContainer
+
+GUI._TransparencySliderBar=GUI._FlySliderBar:Clone()
+GUI._TransparencySliderBar.Size = UDim2.fromScale(1,1)
+GUI._TransparencySliderBar.Position = UDim2.fromScale(0, 0)
+GUI._TransparencySliderBar.BackgroundColor3 = Color3.fromRGB(110, 137, 161)
+GUI._TransparencySliderBar.Parent = GUI._TransparencySlider
+
+GUI._TransparencySliderButton=GUI._FlySliderButton:Clone()
+GUI._TransparencySliderButton.Size = UDim2.new(0.1, 0, 1, 0)
+GUI._TransparencySliderButton.Position = UDim2.new(0, 0, 0, 0)
+GUI._TransparencySliderButton.BackgroundColor3 = Color3.fromRGB(55, 75, 130)
+GUI._TransparencySliderButton.Text = ""
+GUI._TransparencySliderButton.Name="SliderButton"
+GUI._TransparencySliderButton.Parent = GUI._TransparencySlider
+
+GUI._UIStroke19.Parent=GUI._TransparencySliderButton
+GUI._UICorner16.Parent=GUI._TransparencySliderButton
+GUI._UIGradient18.Parent=GUI._TransparencySliderButton
+
+GUI._TransparencyValueDisplay=GUI._FlyValueDisplay:Clone()
+GUI._TransparencyValueDisplay.BackgroundColor3=Color3.fromRGB(105,122,149)
+GUI._TransparencyValueDisplay.BackgroundTransparency=.25
+GUI._TransparencyValueDisplay.Position=UDim2.fromScale(1.049,0)
+GUI._TransparencyValueDisplay.Size=UDim2.fromScale(.23,.986)
+GUI._TransparencyValueDisplay.Text='16'
+GUI._TransparencyValueDisplay.TextColor3=Color3.fromRGB(198,233,255)
+GUI._TransparencyValueDisplay.TextScaled=true
+GUI._TransparencyValueDisplay.Name='ValueDisplay'
+GUI._TransparencyValueDisplay.Parent=GUI._TransparencySlider
+
+GUI._FlySliderButton.Size = UDim2.new(0.1, 0, 1, 0)
+GUI._FlySliderButton.Position = UDim2.new(0, 0, 0, 0)
+GUI._FlySliderButton.BackgroundColor3 = Color3.fromRGB(55, 75, 130)
+GUI._FlySliderButton.Text = ""
+GUI._FlySliderButton.Name="SliderButton"
+GUI._FlySliderButton.Parent = GUI._FlySliderBar
+
+GUI._UIStroke20.Parent=GUI._FlySliderButton
+GUI._UICorner17.Parent=GUI._FlySliderButton
+GUI._UIGradient19.Parent=GUI._FlySliderButton
 
 GUI._UIStroke12.Parent=GUI._FlyValueDisplay
 GUI._UICorner11.Parent=GUI._FlyValueDisplay
@@ -395,12 +588,19 @@ GUI._UITSC10=GUI._UITSC1:Clone()
 GUI._Main.BackgroundColor3=Color3.fromRGB(82, 97, 118)
 GUI._Main.BackgroundTransparency=.25
 GUI._Main.Position=UDim2.fromScale(.356,0)
-GUI._Main.Size=UDim2.fromScale(.258,.12)
+GUI._Main.Size=UDim2.fromScale(.093,.12)
 GUI._Main.Font=Enum.Font.FredokaOne
 GUI._Main.Text='Main'
 GUI._Main.TextColor3=Color3.fromRGB(198,233,255)
 GUI._Main.TextScaled=true
 GUI._Main.Parent=GUI._Frame
+
+GUI._Settings.Image='rbxassetid://11956055886'
+GUI._Settings.BackgroundColor3=Color3.fromRGB(82, 97, 118)
+GUI._Settings.BackgroundTransparency=.25
+GUI._Settings.Position=UDim2.fromScale(.8,0)
+GUI._Settings.Size=UDim2.fromScale(.07,.123)
+GUI._Settings.Parent=GUI._Frame
 
 GUI._UIStroke13.Parent=GUI._Main
 GUI._UIGradient12.Parent=GUI._Main 
@@ -408,8 +608,8 @@ GUI._UITSC2.Parent=GUI._Main
 
 GUI._Scripts.BackgroundColor3=Color3.fromRGB(82, 97, 118)
 GUI._Scripts.BackgroundTransparency=.25
-GUI._Scripts.Position=UDim2.fromScale(.614,0)
-GUI._Scripts.Size=UDim2.fromScale(.258,.12)
+GUI._Scripts.Position=UDim2.fromScale(.453,0)
+GUI._Scripts.Size=UDim2.fromScale(.093,.12)
 GUI._Scripts.Font=Enum.Font.FredokaOne
 GUI._Scripts.Text='Scripts'
 GUI._Scripts.TextColor3=Color3.fromRGB(198,233,255)
@@ -462,7 +662,6 @@ GUI._Status1.Text="🟢  Keyless"
 GUI._Status1.TextColor3=Color3.fromRGB(155,182,255)
 GUI._Status1.TextScaled=true
 
-
 GUI._Status1.Parent=GUI._AzureModded
 GUI._Status2=GUI._Status1:Clone()
 GUI._Status3=GUI._Status1:Clone()
@@ -514,9 +713,341 @@ GUI._UIStroke18.Parent=GUI._Yarhm
 GUI._UIGradient17.Parent=GUI._Yarhm 
 GUI._UITSC7.Parent=GUI._Yarhm
 
+GUI._Settings1.BackgroundTransparency=1
+GUI._Settings1.Position=UDim2.fromScale(.018,.005)
+GUI._Settings1.Size=UDim2.fromScale(.5,.02)
+GUI._Settings1.Font=Enum.Font.FredokaOne
+GUI._Settings1.Text='GUI'
+GUI._Settings1.TextColor3=Color3.fromRGB(155,182,255)
+GUI._Settings1.TextScaled=true
+GUI._Settings1.TextXAlignment=Enum.TextXAlignment.Left
+GUI._Settings1.Parent=GUI._SettingsContainer
 
+GUI._ColorPicker.BackgroundColor3=Color3.fromRGB(90,95,112)
+GUI._ColorPicker.Position=UDim2.fromScale(.596,.199)
+GUI._ColorPicker.Size=UDim2.fromScale(.374,.747)
+GUI._ColorPicker.Visible=false
+GUI._ColorPicker.Parent=GUI._Frame
 
+GUI._ColorPickerMain.BackgroundColor3=Color3.fromRGB(90,95,112)
+GUI._ColorPickerMain.BackgroundTransparency=1
+GUI._ColorPickerMain.Position=UDim2.fromScale(0,-.021)
+GUI._ColorPickerMain.Size=UDim2.fromScale(1,1)
+GUI._ColorPickerMain.ZIndex=2
+GUI._ColorPickerMain.ClipsDescendants=true
+GUI._ColorPickerMain.Parent=GUI._ColorPicker
 
+GUI._ColorPickerSelectedColor.Position=UDim2.fromScale(.073,.711)
+GUI._ColorPickerSelectedColor.Size=UDim2.fromScale(.123,.169)
+GUI._ColorPickerSelectedColor.BackgroundColor3=Color3.fromRGB(90, 95, 112)
+GUI._ColorPickerSelectedColor.ZIndex=2
+GUI._ColorPickerSelectedColor.ClipsDescendants=true
+GUI._ColorPickerSelectedColor.Parent=GUI._ColorPickerMain
+
+GUI._ColorStatNumbers.BackgroundColor3=Color3.fromRGB(207,207,207)
+GUI._ColorStatNumbers.BackgroundTransparency=1
+GUI._ColorStatNumbers.Position=UDim2.fromScale(0,0)
+GUI._ColorStatNumbers.Size=UDim2.fromScale(1,1)
+GUI._ColorStatNumbers.ZIndex=2
+GUI._ColorStatNumbers.ClipsDescendants=true
+GUI._ColorStatNumbers.Parent=GUI._ColorPickerMain
+
+GUI._ColorHexVal.Text='#ffffff'
+GUI._ColorHexVal.TextColor3=Color3.fromRGB(255, 255, 255)
+GUI._ColorHexVal.TextScaled=true
+GUI._ColorHexVal.TextXAlignment=Enum.TextXAlignment.Left
+GUI._ColorHexVal.Font=Enum.Font.FredokaOne
+GUI._ColorHexVal.BackgroundTransparency=.8
+GUI._ColorHexVal.BackgroundColor3=Color3.fromRGB(0,0,0)
+GUI._ColorHexVal.Position=UDim2.fromScale(.247,.958)
+GUI._ColorHexVal.SelectionStart=-1
+GUI._ColorHexVal.Size=UDim2.fromScale(.669,.038)
+GUI._ColorHexVal.Parent=GUI._ColorStatNumbers
+
+GUI._ColorRedVal.Text=0
+GUI._ColorRedVal.TextColor3=Color3.fromRGB(255, 255, 255)
+GUI._ColorRedVal.TextScaled=true
+GUI._ColorRedVal.TextXAlignment=Enum.TextXAlignment.Left
+GUI._ColorRedVal.Font=Enum.Font.FredokaOne
+GUI._ColorRedVal.BackgroundTransparency=.8
+GUI._ColorRedVal.BackgroundColor3=Color3.fromRGB(0,0,0)
+GUI._ColorRedVal.Position=UDim2.fromScale(.247,.738)
+GUI._ColorRedVal.Size=UDim2.fromScale(.199,.051)
+GUI._ColorRedVal.ClipsDescendants=true
+GUI._ColorRedVal.Parent=GUI._ColorStatNumbers
+
+GUI._ColorGreenVal.Text=0
+GUI._ColorGreenVal.TextColor3=Color3.fromRGB(255, 255, 255)
+GUI._ColorGreenVal.TextScaled=true
+GUI._ColorGreenVal.TextXAlignment=Enum.TextXAlignment.Left
+GUI._ColorGreenVal.Font=Enum.Font.FredokaOne
+GUI._ColorGreenVal.BackgroundTransparency=.8
+GUI._ColorGreenVal.BackgroundColor3=Color3.fromRGB(0,0,0)
+GUI._ColorGreenVal.Position=UDim2.fromScale(.479,.738)
+GUI._ColorGreenVal.Size=UDim2.fromScale(.199,.051)
+GUI._ColorGreenVal.ClipsDescendants=true
+GUI._ColorGreenVal.Parent=GUI._ColorStatNumbers
+
+GUI._ColorBlueVal.Text=0
+GUI._ColorBlueVal.TextColor3=Color3.fromRGB(255, 255, 255)
+GUI._ColorBlueVal.TextScaled=true
+GUI._ColorBlueVal.TextXAlignment=Enum.TextXAlignment.Left
+GUI._ColorBlueVal.Font=Enum.Font.FredokaOne
+GUI._ColorBlueVal.BackgroundTransparency=.8
+GUI._ColorBlueVal.BackgroundColor3=Color3.fromRGB(0,0,0)
+GUI._ColorBlueVal.Position=UDim2.fromScale(.716,.738)
+GUI._ColorBlueVal.Size=UDim2.fromScale(.199,.051)
+GUI._ColorBlueVal.ClipsDescendants=true
+GUI._ColorBlueVal.Parent=GUI._ColorStatNumbers
+
+GUI._ColorHueVal.Text=0
+GUI._ColorHueVal.TextColor3=Color3.fromRGB(255, 255, 255)
+GUI._ColorHueVal.TextScaled=true
+GUI._ColorHueVal.TextXAlignment=Enum.TextXAlignment.Left
+GUI._ColorHueVal.Font=Enum.Font.FredokaOne
+GUI._ColorHueVal.BackgroundTransparency=.8
+GUI._ColorHueVal.BackgroundColor3=Color3.fromRGB(0,0,0)
+GUI._ColorHueVal.Position=UDim2.fromScale(.247,.848)
+GUI._ColorHueVal.Size=UDim2.fromScale(.199,.051)
+GUI._ColorHueVal.ClipsDescendants=true
+GUI._ColorHueVal.Parent=GUI._ColorStatNumbers
+
+GUI._ColorSatVal.Text=0
+GUI._ColorSatVal.TextColor3=Color3.fromRGB(255, 255, 255)
+GUI._ColorSatVal.TextScaled=true
+GUI._ColorSatVal.TextXAlignment=Enum.TextXAlignment.Left
+GUI._ColorSatVal.Font=Enum.Font.FredokaOne
+GUI._ColorSatVal.BackgroundTransparency=.8
+GUI._ColorSatVal.BackgroundColor3=Color3.fromRGB(0,0,0)
+GUI._ColorSatVal.Position=UDim2.fromScale(.479,.848)
+GUI._ColorSatVal.Size=UDim2.fromScale(.199,.051)
+GUI._ColorSatVal.ClipsDescendants=true
+GUI._ColorSatVal.Parent=GUI._ColorStatNumbers
+
+GUI._ColorValVal.Text=0
+GUI._ColorValVal.TextColor3=Color3.fromRGB(255, 255, 255)
+GUI._ColorValVal.TextScaled=true
+GUI._ColorValVal.TextXAlignment=Enum.TextXAlignment.Left
+GUI._ColorValVal.Font=Enum.Font.FredokaOne
+GUI._ColorValVal.BackgroundTransparency=.8
+GUI._ColorValVal.BackgroundColor3=Color3.fromRGB(0,0,0)
+GUI._ColorValVal.Position=UDim2.fromScale(.716,.848)
+GUI._ColorValVal.Size=UDim2.fromScale(.199,.051)
+GUI._ColorValVal.ClipsDescendants=true
+GUI._ColorValVal.Parent=GUI._ColorStatNumbers
+
+GUI._ColorBlock.Image='rbxassetid://17073799681'
+GUI._ColorBlock.Position=UDim2.fromScale(.062,.063)
+GUI._ColorBlock.Size=UDim2.fromScale(.635,.565)
+GUI._ColorBlock.Parent=GUI._ColorPickerMain
+
+GUI._ColorValueBlock.Image='rbxassetid://17073827687'
+GUI._ColorValueBlock.Position=UDim2.fromScale(.849,.063)
+GUI._ColorValueBlock.Size=UDim2.fromScale(.081,.565)
+GUI._ColorValueBlock.Parent=GUI._ColorPickerMain
+
+GUI._ColorBlockPicker.AnchorPoint=Vector2.new(.5,.5)
+GUI._ColorBlockPicker.BackgroundColor3=Color3.fromRGB(97,97,97)
+GUI._ColorBlockPicker.Position=UDim2.fromScale(.5,1)
+GUI._ColorBlockPicker.Size=UDim2.fromScale(.037,.037)
+GUI._ColorBlockPicker.Parent=GUI._ColorBlock
+
+GUI._ColorValuePicker.AnchorPoint=Vector2.new(.5,.5)
+GUI._ColorValuePicker.BackgroundColor3=Color3.fromRGB(97,97,97)
+GUI._ColorValuePicker.Position=UDim2.fromScale(.5,0)
+GUI._ColorValuePicker.Size=UDim2.fromScale(1.471,.037)
+GUI._ColorValuePicker.Parent=GUI._ColorValueBlock
+
+GUI._UICorner21.CornerRadius=UDim.new(.075,0)
+GUI._UICorner21.Parent=GUI._ColorPicker
+GUI._UIStroke20.Parent=GUI._ColorPicker
+GUI._UIGradient20.Parent=GUI._ColorPicker
+
+GUI._UIPadding.PaddingLeft=UDim.new(0,4)
+GUI._UIPadding1=GUI._UIPadding:Clone()
+GUI._UIPadding2=GUI._UIPadding:Clone()
+GUI._UIPadding3=GUI._UIPadding:Clone()
+GUI._UIPadding4=GUI._UIPadding:Clone()
+GUI._UIPadding5=GUI._UIPadding:Clone()
+GUI._UIPadding6=GUI._UIPadding:Clone()
+GUI._UIPadding7=GUI._UIPadding:Clone()
+GUI._UIPadding8=GUI._UIPadding:Clone()
+GUI._UIPadding9=GUI._UIPadding:Clone()
+GUI._UIPadding10=GUI._UIPadding:Clone()
+GUI._UIPadding11=GUI._UIPadding:Clone()
+GUI._UIPadding12=GUI._UIPadding:Clone()
+GUI._UIPadding13=GUI._UIPadding:Clone()
+GUI._UIPadding14=GUI._UIPadding:Clone()
+GUI._UIPadding15=GUI._UIPadding:Clone()
+
+GUI._UICorner22.CornerRadius=UDim.new(.0,0)
+GUI._UIStroke21.Thickness=0
+GUI._UICorner22.Parent=GUI._ColorPickerMain
+GUI._UIStroke21.Parent=GUI._ColorPickerMain
+GUI._UIGradient21.Parent=GUI._ColorPickerMain
+
+GUI._UICorner22.CornerRadius=UDim.new(.0,0)
+GUI._UICorner23.Parent=GUI._ColorPickerSelectedColor
+GUI._UIStroke22.Parent=GUI._ColorPickerSelectedColor
+GUI._UIGradient22.Parent=GUI._ColorPickerSelectedColor
+
+GUI._UICorner25.Parent=GUI._ColorHexVal
+GUI._UIStroke24.Parent=GUI._ColorHexVal
+GUI._UIGradient24.Parent=GUI._ColorHexVal
+GUI._UIPadding.Parent=GUI._ColorHexVal
+
+GUI._UICorner26.Parent=GUI._ColorBlueVal
+GUI._UIStroke25.Parent=GUI._ColorBlueVal
+GUI._UIGradient25.Parent=GUI._ColorBlueVal
+GUI._UIPadding1.Parent=GUI._ColorBlueVal
+
+GUI._UICorner27.Parent=GUI._ColorRedVal
+GUI._UIStroke26.Parent=GUI._ColorRedVal
+GUI._UIGradient26.Parent=GUI._ColorRedVal
+GUI._UIPadding2.Parent=GUI._ColorRedVal
+
+GUI._UICorner28.Parent=GUI._ColorGreenVal
+GUI._UIStroke27.Parent=GUI._ColorGreenVal
+GUI._UIGradient27.Parent=GUI._ColorGreenVal
+GUI._UIPadding3.Parent=GUI._ColorGreenVal
+
+GUI._UICorner29.Parent=GUI._ColorSatVal
+GUI._UIStroke28.Parent=GUI._ColorSatVal
+GUI._UIGradient28.Parent=GUI._ColorSatVal
+GUI._UIPadding4.Parent=GUI._ColorSatVal
+
+GUI._UICorner24.Parent=GUI._ColorHueVal
+GUI._UIStroke23.Parent=GUI._ColorHueVal
+GUI._UIGradient23.Parent=GUI._ColorHueVal
+GUI._UIPadding5.Parent=GUI._ColorHueVal
+
+GUI._UICorner30.Parent=GUI._ColorValVal
+GUI._UIStroke29.Parent=GUI._ColorValVal
+GUI._UIGradient29.Parent=GUI._ColorValVal
+GUI._UIPadding6.Parent=GUI._ColorValVal
+
+GUI._UICorner31.CornerRadius=UDim.new(.075,0)
+GUI._UICorner31.Parent=GUI._ColorBlock
+GUI._UIStroke30.Parent=GUI._ColorBlock
+GUI._UIGradient30.Parent=GUI._ColorBlock
+
+GUI._UICorner32.Parent=GUI._ColorValueBlock
+GUI._UIStroke31.Parent=GUI._ColorValueBlock
+GUI._UIGradient31.Parent=GUI._ColorValueBlock
+
+GUI._UICorner33.Parent=GUI._ColorValuePicker
+GUI._UIStroke32.Parent=GUI._ColorValuePicker
+GUI._UIGradient32.Parent=GUI._ColorValuePicker
+
+GUI._UICorner34.Parent=GUI._ColorBlockPicker
+GUI._UIStroke33.Parent=GUI._ColorBlockPicker
+GUI._UIGradient33.Parent=GUI._ColorBlockPicker
+
+GUI._RedLabel.BackgroundTransparency=1
+GUI._RedLabel.Position=UDim2.fromScale(.247,.688)
+GUI._RedLabel.Size=UDim2.fromScale(.199,.051)
+GUI._RedLabel.ClipsDescendants=true
+GUI._RedLabel.TextSize=12
+GUI._RedLabel.Font=Enum.Font.FredokaOne
+GUI._RedLabel.Text='Red'
+GUI._RedLabel.TextColor3=Color3.fromRGB(255,0,0)
+GUI._RedLabel.TextXAlignment=Enum.TextXAlignment.Left
+GUI._RedLabel.Parent=GUI._ColorStatNumbers
+
+GUI._GreenLabel.BackgroundTransparency=1
+GUI._GreenLabel.Position=UDim2.fromScale(.479,.688)
+GUI._GreenLabel.Size=UDim2.fromScale(.199,.051)
+GUI._GreenLabel.ClipsDescendants=true
+GUI._GreenLabel.TextSize=12
+GUI._GreenLabel.Font=Enum.Font.FredokaOne
+GUI._GreenLabel.Text='Green'
+GUI._GreenLabel.TextColor3=Color3.fromRGB(34,255,0)
+GUI._GreenLabel.TextXAlignment=Enum.TextXAlignment.Left
+GUI._GreenLabel.Parent=GUI._ColorStatNumbers
+
+GUI._BlueLabel.BackgroundTransparency=1
+GUI._BlueLabel.Position=UDim2.fromScale(.761,.688)
+GUI._BlueLabel.Size=UDim2.fromScale(.199,.051)
+GUI._BlueLabel.ClipsDescendants=true
+GUI._BlueLabel.TextSize=12
+GUI._BlueLabel.Font=Enum.Font.FredokaOne
+GUI._BlueLabel.Text='Blue'
+GUI._BlueLabel.TextColor3=Color3.fromRGB(0,208,255)
+GUI._BlueLabel.TextXAlignment=Enum.TextXAlignment.Left
+GUI._BlueLabel.Parent=GUI._ColorStatNumbers
+
+GUI._HueLabel.BackgroundTransparency=1
+GUI._HueLabel.Position=UDim2.fromScale(.247,.793)
+GUI._HueLabel.Size=UDim2.fromScale(.199,.051)
+GUI._HueLabel.ClipsDescendants=true
+GUI._HueLabel.TextSize=12
+GUI._HueLabel.Font=Enum.Font.FredokaOne
+GUI._HueLabel.Text='Hue'
+GUI._HueLabel.TextColor3=Color3.fromRGB(38, 37, 61)
+GUI._HueLabel.TextXAlignment=Enum.TextXAlignment.Left
+GUI._HueLabel.Parent=GUI._ColorStatNumbers
+
+GUI._SatLabel.BackgroundTransparency=1
+GUI._SatLabel.Position=UDim2.fromScale(.479,.793)
+GUI._SatLabel.Size=UDim2.fromScale(.199,.051)
+GUI._SatLabel.ClipsDescendants=true
+GUI._SatLabel.TextSize=12
+GUI._SatLabel.Font=Enum.Font.FredokaOne
+GUI._SatLabel.Text='Sat'
+GUI._SatLabel.TextColor3=Color3.fromRGB(38, 37, 61)
+GUI._SatLabel.TextXAlignment=Enum.TextXAlignment.Left
+GUI._SatLabel.Parent=GUI._ColorStatNumbers
+
+GUI._ValLabel.BackgroundTransparency=1
+GUI._ValLabel.Position=UDim2.fromScale(.716,.793)
+GUI._ValLabel.Size=UDim2.fromScale(.199,.051)
+GUI._ValLabel.ClipsDescendants=true
+GUI._ValLabel.TextSize=12
+GUI._ValLabel.Font=Enum.Font.FredokaOne
+GUI._ValLabel.Text='Val'
+GUI._ValLabel.TextColor3=Color3.fromRGB(38, 37, 61)
+GUI._ValLabel.TextXAlignment=Enum.TextXAlignment.Left
+GUI._ValLabel.Parent=GUI._ColorStatNumbers
+
+GUI._BackgroundColor=GUI._Transparency:Clone()
+GUI._BackgroundColor.Name='BackgroundColor'
+GUI._BackgroundColor.Position=UDim2.fromScale(.018,.056)
+GUI._BackgroundColor.Size=UDim2.fromScale(.26,.02)
+GUI._BackgroundColor.Text='Color'
+GUI._BackgroundColor.Parent=GUI._SettingsContainer
+
+GUI._BackgroundColorDisplay.BackgroundColor3=Color3.fromRGB(101,108,139)
+GUI._BackgroundColorDisplay.Position=UDim2.fromScale(.3,.058)
+GUI._BackgroundColorDisplay.Size=UDim2.fromScale(.35,.013)
+GUI._BackgroundColorDisplay.Parent=GUI._SettingsContainer
+
+GUI._BackgroundColorDisplayLabel.BackgroundTransparency=1
+GUI._BackgroundColorDisplayLabel.Position=UDim2.fromScale(0,0)
+GUI._BackgroundColorDisplayLabel.Size=UDim2.fromScale(1,1)
+GUI._BackgroundColorDisplayLabel.Font=Enum.Font.FredokaOne
+GUI._BackgroundColorDisplayLabel.Text="90, 95, 112"
+GUI._BackgroundColorDisplayLabel.TextScaled=true
+GUI._BackgroundColorDisplayLabel.Parent=GUI._BackgroundColorDisplay
+
+GUI._UICorner35.Parent=GUI._BackgroundColor
+GUI._UIStroke34.Parent=GUI._BackgroundColor
+GUI._UIGradient34.Parent=GUI._BackgroundColor
+
+GUI._UICorner36.Parent=GUI._BackgroundColorDisplay
+GUI._UIStroke35.Parent=GUI._BackgroundColorDisplay
+GUI._UIGradient35.Parent=GUI._BackgroundColorDisplay
+
+GUI._UICorner37.Parent=GUI._BackgroundColorDisplayLabel
+GUI._UIStroke36.Parent=GUI._BackgroundColorDisplayLabel
+GUI._UIGradient36.Parent=GUI._BackgroundColorDisplayLabel
+
+GUI._ResetBackgroundColor=GUI._BackgroundColor:Clone()
+GUI._ResetBackgroundColor.Name='ResetBackgroundColor'
+GUI._ResetBackgroundColor.Position=UDim2.fromScale(.67,.057)
+GUI._ResetBackgroundColor.Size=UDim2.fromScale(.22,.015)
+GUI._ResetBackgroundColor.Text='Reset'
+GUI._ResetBackgroundColor.TextColor3=Color3.fromRGB(167,220,255)
+GUI._ResetBackgroundColor.Parent=GUI._SettingsContainer
 
 -- Variables
 
@@ -647,6 +1178,10 @@ local function updateFlySpeed(value)
 	end
 end
 
+local function updateTransparency(value)
+	GUI._Frame.BackgroundTransparency=value
+end
+
 local function isMouseInside(button)
 	local mouse = game.Players.LocalPlayer:GetMouse()
 	local buttonPos = button.AbsolutePosition
@@ -656,7 +1191,7 @@ local function isMouseInside(button)
 		mouse.Y >= buttonPos.Y and mouse.Y <= buttonPos.Y + buttonSize.Y
 end
 
-local function createSliderLogic(sliderButton, sliderBar, updateFunc, minValue, maxValue,Type)
+local function createSliderLogic(sliderButton, sliderBar, updateFunc, minValue, maxValue, Type, Type2) 
 	local dragging = false
 	local startPos
 	local offsetPos
@@ -668,15 +1203,23 @@ local function createSliderLogic(sliderButton, sliderBar, updateFunc, minValue, 
 
 		local value = minValue + (newPosition / (sliderBar.AbsoluteSize.X - sliderButton.AbsoluteSize.X)) * (maxValue - minValue)
 
-		if Type=='walkspeed' then
-			print(Type)
-			GUI._WalkSpeedValueDisplay.Text=tostring(math.floor(value))
-			walkspeed=value
+		if Type2 == 'float' then
+			value = math.floor(value * 10) / 10
+		else
+			value = math.floor(value)
+		end
+
+		if Type == 'walkspeed' then
+			GUI._WalkSpeedValueDisplay.Text = tostring(value)
+			walkspeed = value
 			updateFunc(value)
-		elseif Type=='fly' then
-			print(Type)
-			GUI._FlyValueDisplay.Text=tostring(math.floor(value))
-			flymaxspeed=value
+		elseif Type == 'fly' then
+			GUI._FlyValueDisplay.Text = tostring(value)
+			flymaxspeed = value
+			updateFunc(value)
+		elseif Type == 'transparency' then
+			GUI._TransparencyValueDisplay.Text = tostring(value)
+			GUI._Frame.BackgroundTransparency=value
 			updateFunc(value)
 		end
 	end
@@ -710,8 +1253,10 @@ local function createSliderLogic(sliderButton, sliderBar, updateFunc, minValue, 
 
 end
 
-createSliderLogic(GUI._WalkSpeedSliderButton, GUI._WalkSpeedSliderBar, updateWalkSpeed, 1, 100,'walkspeed')
-createSliderLogic(GUI._FlySliderButton, GUI._FlySliderBar, updateFlySpeed, 1, 100,'fly')
+createSliderLogic(GUI._WalkSpeedSliderButton, GUI._WalkSpeedSliderBar, updateWalkSpeed, 1, 100, 'walkspeed')
+createSliderLogic(GUI._FlySliderButton, GUI._FlySliderBar, updateFlySpeed, 1, 100, 'fly')
+createSliderLogic(GUI._TransparencySliderButton, GUI._TransparencySliderBar, updateTransparency, 0, 1, 'transparency', 'float')
+
 
 -- Input Handling
 
@@ -724,12 +1269,24 @@ end)
 
 GUI._Main.MouseButton1Click:Connect(function()
 	GUI._MainContainer.Visible=true
+	GUI._SettingsContainer.Visible=false
 	GUI._ScriptsContainer.Visible=false
 end)
 
 GUI._Scripts.MouseButton1Click:Connect(function()
 	GUI._MainContainer.Visible=false
+	GUI._SettingsContainer.Visible=false
 	GUI._ScriptsContainer.Visible=true
+end)
+
+GUI._Settings.MouseButton1Click:Connect(function()
+	GUI._MainContainer.Visible=false
+	GUI._ScriptsContainer.Visible=false
+	GUI._SettingsContainer.Visible=true
+end)
+
+GUI._BackgroundColor.MouseButton1Click:Connect(function()
+	GUI._ColorPicker.Visible=not GUI._ColorPicker.Visible
 end)
 
 GUI._InfiniteYield.MouseButton1Click:Connect(function()
@@ -829,4 +1386,217 @@ UserInputService.InputEnded:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 then
 		isDraggingGui = false
 	end
+end)
+
+-- Color picker
+
+touchTap = Enum.UserInputType.Touch
+mouse1 = Enum.UserInputType.MouseButton1
+mouseMovement = Enum.UserInputType.MouseMovement
+
+runService = game:GetService("RunService")
+
+colorPicker = GUI._ColorPickerMain
+colorPickerMain = GUI._ColorPicker
+
+colorStatNumberFrame = GUI._ColorStatNumbers
+selectedColorFrame = GUI._ColorPickerSelectedColor
+colorBlock = GUI._ColorBlock
+valueBlock = GUI._ColorValueBlock
+
+pickerColor = GUI._ColorBlockPicker
+pickerValue = GUI._ColorValuePicker
+
+redVal = GUI._ColorRedVal
+greenVal = GUI._ColorGreenVal
+blueVal = GUI._ColorBlueVal
+hueVal = GUI._ColorHueVal
+satVal = GUI._ColorSatVal
+valVal = GUI._ColorValVal
+hexVal = GUI._ColorHexVal
+
+colorValTbl = {redVal,greenVal,blueVal,hueVal,satVal,valVal}
+
+acceptedChars = "1234567890abcdef"
+multiplyTbl = {255,255,255,360,100,100}
+
+colorChanging = false
+
+inputTypeNeeded = mouse1
+
+if UserInputService.MouseEnabled == false then inputTypeNeeded = touchTap end
+
+if UserInputService.MouseEnabled == false then
+	UserInputService.TouchMoved:Connect(function(inp)
+		inputPosition = inp.Position
+	end)
+else
+	UserInputService.InputChanged:Connect(function(inp)
+		if inp.UserInputType == mouseMovement then
+			inputPosition = inp.Position
+		end
+	end)
+end
+
+UserInputService.InputBegan:Connect(function(inp) if inp.UserInputType == inputTypeNeeded then plrInputHeldDown = true end
+end)
+UserInputService.InputEnded:Connect(function(inp) if inp.UserInputType == inputTypeNeeded then plrInputHeldDown = false end
+end)
+
+function roundNum(n,decimalPlaces)
+	local nDP = 10^decimalPlaces
+	return math.floor(n*nDP)/nDP
+end
+
+function getNormalizedCursorPosition(mousePosition, frame)
+	local framePosition = frame.AbsolutePosition
+	local frameSize = frame.AbsoluteSize
+
+	local relativeX = (mousePosition.X - framePosition.X) / frameSize.X
+	local relativeY = (mousePosition.Y - framePosition.Y) / frameSize.Y
+
+	return relativeX, relativeY
+end
+
+local function updatePickerPos()
+	local clrThing = selectedColorFrame.BackgroundColor3
+	local h,s,v = clrThing:ToHSV()
+	pickerColor.Position = UDim2.new(1-h,0,1-s,0)
+	pickerValue.Position = UDim2.new(0.5,0,1-v,0)
+end
+
+hexVal:GetPropertyChangedSignal("Text"):Connect(function()
+
+	if colorChanging == false then
+		local newString = string.gsub(hexVal.Text,"#","")
+
+		local finalString = ""
+
+		for i = 1, #newString do
+			local char = string.lower(newString:sub(i, i))
+
+
+			if string.find(acceptedChars,char) ~= nil then
+				finalString = finalString .. char
+			end
+		end
+
+		finalString = string.sub(finalString,1,6)
+
+		local finalHex = finalString
+		while string.len(finalHex) < 6 do
+			finalHex = finalHex .. "0"
+		end
+
+		hexVal.Text = "#"..finalHex
+
+		selectedColorFrame.BackgroundColor3 = Color3.fromHex(finalHex)
+
+		updatePickerPos()
+	end
+
+end)
+
+function updateTextBoxes()
+	local newClr = selectedColorFrame.BackgroundColor3
+	local nC1,nC2,nC3 = newClr:ToHSV()
+
+	local nC4 = newClr:ToHex()
+	hexVal.Text = "#"..nC4
+
+	local newClrTbl = {newClr.R,newClr.G,newClr.B,nC1,nC2,nC3}
+
+	for inc,clrValT in pairs(colorValTbl) do
+
+		clrValT.Text = roundNum(newClrTbl[inc]*multiplyTbl[inc],0)
+
+	end
+end
+
+selectedColorFrame:GetPropertyChangedSignal("BackgroundColor3"):Connect(function()
+	
+	GUI._BackgroundColorDisplayLabel.Text = tostring(GUI._ColorRedVal.Text..', '..GUI._ColorGreenVal.Text..', '..GUI._ColorBlueVal.Text)
+	GUI._Frame.BackgroundColor3 = selectedColorFrame.BackgroundColor3
+	
+	updateTextBoxes()
+
+	if colorChanging == false then
+		updatePickerPos()
+	end
+
+end)
+
+colorBlock.InputBegan:Connect(function(inp)
+
+	if inp.UserInputType == inputTypeNeeded then
+
+		colorChanging = true
+		plrInputHeldDown = true
+		while plrInputHeldDown == true do
+
+			local xPos,yPos = getNormalizedCursorPosition(inputPosition,colorBlock)
+			xPos,yPos = math.clamp(xPos,0,1),math.clamp(yPos,0,1)
+
+			pickerColor.Position = UDim2.new(xPos,0,yPos,0)
+
+			local h,s,v = selectedColorFrame.BackgroundColor3:ToHSV()
+
+			selectedColorFrame.BackgroundColor3 = Color3.fromHSV(1 - xPos,1 - yPos,v)
+
+			runService.Heartbeat:Wait()
+		end
+
+		colorChanging = false
+
+	end
+
+end)
+
+valueBlock.InputBegan:Connect(function(inp)
+
+	if inp.UserInputType == inputTypeNeeded then
+
+		colorChanging = true
+		plrInputHeldDown = true
+		while plrInputHeldDown == true do
+
+			local xPos,yPos = getNormalizedCursorPosition(inputPosition,colorBlock)
+			yPos = math.clamp(yPos,0,1)
+
+			pickerValue.Position = UDim2.new(.5,0,yPos,0)
+			
+			local h,s,v = selectedColorFrame.BackgroundColor3:ToHSV()
+			selectedColorFrame.BackgroundColor3 = Color3.fromHSV(h,s,1 - yPos)
+
+			runService.Heartbeat:Wait()
+		end
+
+		colorChanging = false
+
+	end
+
+end)
+
+local function changeColor(clr)
+	selectedColorFrame.BackgroundColor3 = clr
+	updateTextBoxes()
+
+	if colorChanging == false then
+		updatePickerPos()
+	end
+
+end
+
+changeColor(Color3.fromRGB(90, 95, 112))
+updateTextBoxes()
+updatePickerPos()
+
+
+GUI._ResetBackgroundColor.MouseButton1Click:Connect(function()
+	
+	GUI._Frame.BackgroundTransparency=Color3.fromRGB(90, 95, 112)
+		
+	changeColor(Color3.fromRGB(90, 95, 112))
+	updateTextBoxes()
+	updatePickerPos()
 end)
