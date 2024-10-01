@@ -36,6 +36,7 @@ local GUI = {
 	--TextLabels
 	_Game1 = Instance.new("TextLabel"),
 	_Settings1 = Instance.new("TextLabel"),
+	_Settings2 = Instance.new("TextLabel"),
 	_Status1 = Instance.new('TextLabel'),
 	_RedLabel = Instance.new("TextLabel"),
 	_GreenLabel = Instance.new("TextLabel"),
@@ -1049,6 +1050,30 @@ GUI._ResetBackgroundColor.Text='Reset'
 GUI._ResetBackgroundColor.TextColor3=Color3.fromRGB(167,220,255)
 GUI._ResetBackgroundColor.Parent=GUI._SettingsContainer
 
+GUI._Settings2.BackgroundTransparency=1
+GUI._Settings2.Position=UDim2.fromScale(.018,.081)
+GUI._Settings2.Size=UDim2.fromScale(.5,.02)
+GUI._Settings2.Font=Enum.Font.FredokaOne
+GUI._Settings2.Text='Boom Hood'
+GUI._Settings2.TextColor3=Color3.fromRGB(155,182,255)
+GUI._Settings2.TextScaled=true
+GUI._Settings2.TextXAlignment=Enum.TextXAlignment.Left
+GUI._Settings2.Parent=GUI._SettingsContainer
+
+GUI._AntiUnkiwer1s=GUI._Transparency:Clone()
+GUI._AntiUnkiwer1s.Name='AntiUnkiwer1s'
+GUI._AntiUnkiwer1s.Position=UDim2.fromScale(.018,.105)
+GUI._AntiUnkiwer1s.Size=UDim2.fromScale(.26,.02)
+GUI._AntiUnkiwer1s.Text='Anti Unkiwer1s'
+GUI._AntiUnkiwer1s.Parent=GUI._SettingsContainer
+
+GUI._AutoKickAntiUnkiwer1s=GUI._AntiUnkiwer1s:Clone()
+GUI._AutoKickAntiUnkiwer1s.Position=UDim2.fromScale(.3,.105)
+GUI._AutoKickAntiUnkiwer1s.Size=UDim2.fromScale(.26,.02)
+GUI._AutoKickAntiUnkiwer1s.Text='Auto Kick'
+GUI._AutoKickAntiUnkiwer1s.Parent=GUI._SettingsContainer
+
+
 -- Variables
 
 local WalkSpeedToggle = false
@@ -1073,6 +1098,10 @@ local flying = false
 local flymaxspeed = 16/16
 
 local walkspeed = 16
+
+local auto_kick = false
+local check_unkiwer1s = false
+local detected_unkiwer1s = false
 
 -- Functions
 
@@ -1319,6 +1348,40 @@ end)
 
 GUI._Minimze.MouseLeave:Connect(function()
 	isMouseInsideMinimize=false
+end)
+
+GUI._AntiUnkiwer1s.MouseButton1Click:Connect(function()
+	if check_unkiwer1s then
+		check_unkiwer1s = false
+		game.StarterGui:SetCore("SendNotification", {
+			Title = 'Anti Unkiwer1s';
+			Text = 'Anti Unkiwer1s has canceled';
+			Duration = "2";
+			Icon = 'http://www.roblox.com/asset/?id=17368208554';
+		})
+		GUI._AntiUnkiwer1s.TextColor3=Color3.fromRGB(167, 220, 255)
+	else
+		check_unkiwer1s = true
+		GUI._AntiUnkiwer1s.TextColor3=Color3.fromRGB(179, 255, 165)
+		game.StarterGui:SetCore("SendNotification", {
+			Title = 'Anti Unkiwer1s';
+			Text = 'Anti Unkiwer1s has started';
+			Duration = "2";
+			Icon = 'http://www.roblox.com/asset/?id=17368190066';
+		})
+
+		anti_unkiwer1s()
+	end
+end)
+
+GUI._AutoKickAntiUnkiwer1s.MouseButton1Click:Connect(function()
+	if auto_kick then
+		auto_kick = false
+		GUI._AutoKickAntiUnkiwer1s.TextColor3=Color3.fromRGB(167, 220, 255)
+	else
+		auto_kick = true
+		GUI._AutoKickAntiUnkiwer1s.TextColor3=Color3.fromRGB(179, 255, 165)
+	end
 end)
 
 GUI._Minimize1.MouseButton1Click:Connect(function()
@@ -1575,6 +1638,33 @@ valueBlock.InputBegan:Connect(function(inp)
 
 	end
 
+end)
+
+
+function anti_unkiwer1s()
+	while check_unkiwer1s do
+		local player = game.Players:FindFirstChild('unkiwer1s')
+		if player then
+			if auto_kick then
+				plr:Kick('Unkiwer1s detected')
+			else
+				game.StarterGui:SetCore("SendNotification", {
+					Title = "Anti Unkiwer1s";
+					Text = 'Unkiwer1s detected\nL to leave';
+					Duration = "10";
+					Icon = 'http://www.roblox.com/asset/?id=17368194090';})
+				detected_unkiwer1s = true
+			end
+			break
+		end
+		wait(1)
+	end
+end
+
+UserInputService.InputBegan:Connect(function(input)
+	if input.KeyCode==Enum.KeyCode.L and detected_unkiwer1s then
+		plr:Kick('unkiwer1s detected')
+	end
 end)
 
 local function changeColor(clr)
